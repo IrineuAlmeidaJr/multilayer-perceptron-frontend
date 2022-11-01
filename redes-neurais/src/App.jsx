@@ -1,0 +1,149 @@
+import { Header } from "./components/Header"
+
+export function App() {
+
+  return (
+    <div 
+    className="
+    flex
+    flex-col
+    items-center
+    min-w-[956px]
+    ">
+      <div
+      className="
+      flex
+      items-center
+      justify-between
+      w-[956px]
+      h-8
+      mt-8
+      px-2 
+      rounded-t-sm     
+      bg-gradient-to-r 
+      from-[#00008a]
+      to-[#0e7dbc]
+      border-x-4
+      border-t-4
+      border-[#bdbdbd]
+      border-t-[#bbbbbb]
+      border-l-[#ababab]
+      border-r-[#5e5e5e]">
+        <div className="flex items-center gap-1">        
+          <img 
+          src="./images/brain.png" 
+          alt="imagem de celebro" 
+          className="w-6 h-6"/>
+          <h1 className="text-white font-semibold">Redes Neurais 1.0</h1>
+        </div>
+        <div className="flex gap-1">
+          <button 
+          className="
+          flex
+          items-center
+          justify-center
+          bg-[#bdbdbd] 
+          w-5 
+          h-5 
+          border-2
+          border-t-[#cfcfcf]
+          hover:border-t-[#1f1f1f]
+          border-l-[#cfcfcf]
+          hover:border-l-[#1f1f1f]
+          border-r-[#1f1f1f]
+          hover:border-r-[#cfcfcf]
+          border-b-[#1f1f1f]
+          hover:border-b-[#cfcfcf]
+          font-bold
+          text-2xl
+          text-[#232323]
+          ">
+            -
+          </button>
+          <button 
+          className="
+          flex
+          items-center
+          justify-center
+          bg-[#bdbdbd] 
+          w-5 
+          h-5 
+          border-2
+          border-t-[#cfcfcf]
+          hover:border-t-[#1f1f1f]
+          border-l-[#cfcfcf]
+          hover:border-l-[#1f1f1f]
+          border-r-[#1f1f1f]
+          hover:border-r-[#cfcfcf]
+          border-b-[#1f1f1f]
+          hover:border-b-[#cfcfcf]
+          font-semibold
+          text-3xl
+          text-center
+          text-[#232323]
+          ">
+            ▫
+          </button>
+          <button 
+          className="
+          flex
+          items-center
+          justify-center
+          bg-[#bdbdbd] 
+          w-5 
+          h-5 
+          border-2
+          border-t-[#cfcfcf]
+          hover:border-t-[#1f1f1f]
+          border-l-[#cfcfcf]
+          hover:border-l-[#1f1f1f]
+          border-r-[#1f1f1f]
+          hover:border-r-[#cfcfcf]
+          border-b-[#1f1f1f]
+          hover:border-b-[#cfcfcf]
+          font-bold
+          text-sm
+          text-[#232323]
+          ">
+            X
+          </button>
+        </div>
+        
+      </div>
+      <div 
+      className="
+      w-[956px]
+      h-[716px]
+      mb-8
+      p-2
+      rounded-b-sm   
+      bg-[#bdbdbd]
+      border-x-4
+      border-b-4
+      border-[#bdbdbd] 
+      border-l-[#ababab]
+      border-b-[#6c6c6c]
+      border-r-[#5e5e5e]
+      ">
+        <Header />
+        <div 
+        className="
+        w-full
+        h-[372px]
+        mb-8
+        p-2
+        rounded-b-sm   
+        bg-[#bdbdbd]
+        border-4
+        border-t-[#d5d5d5] 
+        border-l-[#c7c7c7]
+        border-b-[#6a6a6a]
+        border-r-[#767676]
+        ">
+
+        </div>
+      </div>   
+    </div>
+  )
+}
+
