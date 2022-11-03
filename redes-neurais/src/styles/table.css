@@ -1,0 +1,33 @@
+table {
+    @apply
+    w-full 
+    h-full
+    text-sm
+    text-left 
+    text-black
+}
+
+thead {
+    @apply
+    text-black
+    uppercase 
+    bg-[#c1bfbf]   
+}
+
+thead tr th {
+    @apply
+    py-3 
+    px-6
+}
+
+tbody tr {
+    @apply
+    bg-[#e7e7e7] 
+    border-b
+}
+
+tbody tr td {
+    @apply
+    py-4 
+    px-6
+}

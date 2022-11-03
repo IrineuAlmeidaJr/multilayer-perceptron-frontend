@@ -1,0 +1,242 @@
+header {
+    @apply 
+    h-80 px-1 pt-2
+}
+
+.box-top {
+    @apply
+    flex 
+    justify-between
+}
+
+.box-top-image {
+    @apply
+    w-44                
+}
+
+.box-top-text {
+    @apply
+    flex 
+    flex-col 
+    justify-center 
+    items-center 
+    mr-[30%]
+}
+
+.box-top-text > h1{
+    @apply
+    text-xl  
+    font-semibold 
+    uppercase
+}
+
+.box-top-text > h2{
+    @apply
+    text-lg 
+    font-semibold
+    uppercase 
+    text-green-700
+}
+
+.box-inputs {
+    @apply
+    mt-2 
+    flex 
+    justify-between
+}
+
+.box-input-1 {
+    @apply
+    w-[340px] 
+    mt-2 
+    flex 
+    flex-col 
+    gap-2
+}
+
+.box-input-1 .title {
+    @apply
+    font-semibold
+}
+
+.box-input-1 .my-label {
+    @apply
+    flex 
+    justify-between
+}
+
+.box-input-1 .input-disabled {
+    @apply
+    border-2
+    border-r-[#cfcfcf]
+    border-b-[#cfcfcf]
+    border-t-[#1f1f1f]
+    border-l-[#1f1f1f]
+    bg-[#bdbdbd] 
+    w-44
+    px-2
+    py-1
+}
+
+.box-input-1 .input-enabled {
+    @apply
+    w-44
+    px-2
+    py-1
+    border-2
+    border-r-[#cfcfcf]
+    border-b-[#cfcfcf]
+    border-t-[#1f1f1f]
+    border-l-[#1f1f1f]
+    bg-white
+    focus:outline-none
+}
+
+.box-input-2 {
+    @apply
+    w-48 
+    mt-4 
+    flex 
+    flex-col 
+    gap-2
+}
+
+.box-input-2 label {
+    @apply
+    flex 
+    flex-col 
+    justify-between 
+    font-semibold
+}
+
+.box-input-2 label + label {
+    @apply
+    mt-5 
+    flex 
+    flex-col
+    justify-between 
+    font-semibold
+}
+
+.box-input-2 input {
+    @apply
+    w-44
+    px-2
+    py-1
+    border-2
+    border-r-[#cfcfcf]
+    border-b-[#cfcfcf]
+    border-t-[#1f1f1f]
+    border-l-[#1f1f1f]
+    bg-white
+    focus:outline-none
+}
+
+.box-input-3 {
+    @apply
+    w-24 
+    mt-4 
+    flex 
+    flex-col 
+    gap-2
+}
+
+.box-input-3 label {
+    @apply
+    flex 
+    flex-col 
+    justify-between 
+    font-semibold
+}
+
+.box-input-3 input {
+    @apply
+    border-2
+    border-r-[#cfcfcf]
+    border-b-[#cfcfcf]
+    border-t-[#1f1f1f]
+    border-l-[#1f1f1f]
+    bg-white
+    focus:outline-none 
+    w-20
+    px-2
+    py-1
+}
+
+.box-input-4 {
+    @apply
+    w-[240px] 
+    mt-4 
+    flex 
+    flex-col 
+    gap-2
+}
+
+.box-input-4 {
+    @apply
+    font-semibold
+}
+
+.box-input-4 .my-label {
+    @apply
+    mt-1 
+    flex 
+    items-center
+}
+
+.box-input-4 input {
+    @apply
+    mr-2
+    w-4 
+    h-4
+    focus:outline-none
+}
+
+.box-bottom {
+    @apply
+    mt-2 
+    flex 
+    items-end
+}
+
+.box-bottom input {
+    @apply
+    hidden
+}
+
+.box-bottom .button-press {
+    @apply 
+    flex
+    items-center
+    justify-center
+    block
+    ml-3
+    mt-3
+    px-2
+    py-3
+    h-10
+    w-52
+    font-semibold
+    text-sm
+    uppercase
+    cursor-pointer
+    bg-[#bdbdbd] 
+    border-2
+    border-t-[#cfcfcf]
+    active:border-t-[#1f1f1f]
+    border-l-[#cfcfcf]
+    active:border-l-[#1f1f1f]
+    border-r-[#1f1f1f]
+    active:border-r-[#cfcfcf]
+    border-b-[#1f1f1f]
+    active:border-b-[#cfcfcf]
+}
+
+.box-bottom img {
+    @apply 
+    w-6
+    h-6 
+    mr-2
+}
+
+

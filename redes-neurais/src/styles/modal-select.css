@@ -1,0 +1,29 @@
+.body {
+    @apply
+    flex
+    flex-col
+    items-center       
+    w-[300px]
+    min-w-[300px]
+    absolute
+    top-[50%]
+    left-[50%]
+    translate-x-[-50%]
+    translate-y-[-50%] 
+    shadow-lg
+    shadow-black
+}
+
+.central {
+    @apply
+    w-[300px]
+    p-2
+    rounded-b-sm   
+    bg-[#bdbdbd]
+    border-x-4
+    border-b-4
+    border-[#bdbdbd] 
+    border-l-[#ababab]
+    border-b-[#6c6c6c]
+    border-r-[#5e5e5e]
+}

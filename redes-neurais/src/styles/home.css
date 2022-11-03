@@ -1,0 +1,39 @@
+.box-body {
+    @apply
+    flex
+    flex-col
+    items-center
+    min-w-[956px]
+}
+
+.box-center {
+    @apply
+    w-[956px]
+    h-[716px]
+    mb-8
+    p-2
+    rounded-b-sm   
+    bg-[#bdbdbd]
+    border-x-4
+    border-b-4
+    border-[#bdbdbd] 
+    border-l-[#ababab]
+    border-b-[#6c6c6c]
+    border-r-[#5e5e5e]
+}
+
+.box-table {
+    @apply
+    w-full
+    h-[372px]
+    mb-8
+    p-2
+    rounded-b-sm   
+    bg-[#b2b2b2]
+    border-4
+    border-t-[#d5d5d5] 
+    border-l-[#c7c7c7]
+    border-b-[#6a6a6a]
+    border-r-[#767676]
+    overflow-auto
+}

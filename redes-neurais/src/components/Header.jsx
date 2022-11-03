@@ -1,210 +1,122 @@
+import { useState } from "react"
+import { ModalSelect } from './ModalSelect';
 
-export function Header() {
+import '../styles/header.css'
+
+export function Header(props) {    
+    const [isOpen, setIsOpen] = useState(false);
+    const handleOpen = () => setIsOpen(true);
+    const handleClose = () => setIsOpen(false);
+
+    function handleFileChosen(input) {
+        const file = input.target.files[0];
+        const reader = new FileReader();
+    
+        reader.onload = (event) => {
+            const file = event.target.result;
+            const allLines = file.split(/\r\n|\n/);
+            // Reading line by line
+            allLines.forEach((line) => {
+                props.handleTest(line)
+            });
+        };
+    
+        // Casso erro aparece um alert
+        reader.onerror = (event) => {
+            alert(event.target.error.name);
+        };
+    
+        reader.readAsText(file);
+    
+    }
 
     return (
-        <header className="h-80 px-1 pt-2">
-            <div className="flex justify-between">
-                <img 
-                src="./images/logo-fipp.png" 
-                alt="logo fipp" 
-                className="
-                w-44
-                "/>
-                <div className="flex flex-col justify-center items-center mr-[30%]">
-                    <h1 className="text-xl  font-semibold uppercase">
+        <header>
+            <div className="box-top">
+                <img src="./images/logo-fipp.png" alt="logo fipp" className="box-top-image"/>
+                <div className="box-top-text">
+                    <h1>
                         Inteligência Artificial
                     </h1>
-                    <h2 className="text-lg font-semibold uppercase text-green-700">
+                    <h2>
                         Redes Neurais
                     </h2>
                 </div>                
             </div>
-            <div className="flex justify-between">
-                <div className="w-[340px] mt-2 flex flex-col gap-2">
-                    <label className="font-semibold">Configurar números de neurôneos:</label>
-                    <label className="flex justify-between">
+            <div className="box-inputs">
+                <div className="box-input-1">
+                    <label className="title">Configurar números de neurôneos:</label>
+                    <label className="my-label">
                         Camada de Entrada:
-                        <input 
-                        type="text" 
-                        value={6} 
-                        disabled
-                        className="
-                        border-2
-                        border-r-[#cfcfcf]
-                        border-b-[#cfcfcf]
-                        border-t-[#1f1f1f]
-                        border-l-[#1f1f1f]
-                        bg-[#bdbdbd] 
-                        w-44
-                        px-2
-                        py-1" 
-                        />
+                        <input type="text" defaultValue={6}  className="input-disabled" disabled/>
                     </label>
-                    <label className="flex justify-between">
+                    <label className="my-label">
                         Camada de Saída:
-                        <input 
-                        type="text" 
-                        value={6} 
-                        disabled
-                        className="
-                        border-2
-                        border-r-[#cfcfcf]
-                        border-b-[#cfcfcf]
-                        border-t-[#1f1f1f]
-                        border-l-[#1f1f1f]
-                        bg-[#bdbdbd] 
-                        w-44
-                        px-2
-                        py-1" 
-                        />
+                        <input type="text" defaultValue={6} className="input-disabled" disabled/>
                     </label>
-                    <label className="flex justify-between">
+                    <label className="my-label">
                         Camada de Oculta:
-                        <input 
-                        type="text" 
-                        placeholder="5"
-                        className="
-                        border-2
-                        border-r-[#cfcfcf]
-                        border-b-[#cfcfcf]
-                        border-t-[#1f1f1f]
-                        border-l-[#1f1f1f]
-                        bg-white
-                        focus:outline-none 
-                        w-44
-                        px-2
-                        py-1"
-                        />
+                        <input type="text" placeholder="5" className="input-enabled"/>
                     </label>
                 </div>
-                <div className="w-48 mt-4 flex flex-col gap-2">
-                    <label className="flex flex-col justify-between font-semibold">
+                <div className="box-input-2">
+                    <label>
                         Valor do Erro:
-                        <input 
-                        type="text"
-                        placeholder="0,00001"
-                        className="
-                        w-44
-                        px-2
-                        py-1
-                        border-2
-                        border-r-[#cfcfcf]
-                        border-b-[#cfcfcf]
-                        border-t-[#1f1f1f]
-                        border-l-[#1f1f1f]
-                        bg-white
-                        focus:outline-none"
-                        />
+                        <input type="text" placeholder="0,00001" />
                     </label>
-                    <label className="mt-5 flex flex-col justify-between font-semibold">
+                    <label>
                         Número de Iterações:
-                        <input 
-                        type="text"
-                        placeholder="2000"
-                        className="
-                        w-44
-                        px-2
-                        py-1
-                        border-2
-                        border-r-[#cfcfcf]
-                        border-b-[#cfcfcf]
-                        border-t-[#1f1f1f]
-                        border-l-[#1f1f1f]
-                        bg-white
-                        focus:outline-none"
-                        />
+                        <input type="text" placeholder="2000" />
                     </label>
                 </div>
-                <div className="w-24 mt-4 flex flex-col gap-2">
-                    <label className="flex flex-col justify-between font-semibold">
+                <div className="box-input-3">
+                    <label>
                         N:
-                        <input 
-                        type="text"
-                        placeholder="0,2"
-                        className="
-                        border-2
-                        border-r-[#cfcfcf]
-                        border-b-[#cfcfcf]
-                        border-t-[#1f1f1f]
-                        border-l-[#1f1f1f]
-                        bg-white
-                        focus:outline-none 
-                        w-20
-                        px-2
-                        py-1"
-                        />
+                        <input  type="text" placeholder="0,2" />
                     </label>
                 </div>
-                <div className="w-[240px] mt-4 flex flex-col gap-2">
-                    <label className="font-semibold">
+                <div className="box-input-4">
+                    <label className="title">
                         Função de Transferência:
                     </label>
-                    <label>
-                        <input 
-                        className="mt-2 mr-2"
-                        type="radio" 
-                        name="funcao" 
-                        value={1}
-                        checked/>
-                        {"Linear"}
+                    <label className="my-label">
+                        <input type="radio" name="funcao" value={1} defaultChecked/>
+                        Linear
                     </label>
-                    <label>
-                        <input 
-                        className="mr-2"
-                        type="radio"  
-                        name="funcao" 
-                        value={2}/>
-                        {"Logística"}
+                    <label className="my-label">
+                        <input type="radio" name="funcao" value={2}/>
+                        Logística
                     </label>
-                    <label>
-                        <input 
-                        className="mr-2"
-                        type="radio"  
-                        name="funcao" 
-                        value={3}/>
-                        {"Hiperbórica"}
+                    <label className="my-label">
+                        <input type="radio" name="funcao" value={3}/>
+                        Hiperbórica
                     </label>
                 </div>
             </div>
-            <form>
-                <div className="flex justify-center">
-                    <label 
-                    for="arquivo"
-                    className="
-                    flex
-                    items-center
-                    justify-center
-                    block
-                    mt-3
-                    px-5
-                    py-3
-                    h-10
-                    w-52
-                    font-semibold
-                    text-sm
-                    uppercase
-                    cursor-pointer
-                    bg-[#bdbdbd] 
-                    border-2
-                    border-t-[#cfcfcf]
-                    hover:border-t-[#1f1f1f]
-                    border-l-[#cfcfcf]
-                    hover:border-l-[#1f1f1f]
-                    border-r-[#1f1f1f]
-                    hover:border-r-[#cfcfcf]
-                    border-b-[#1f1f1f]
-                    hover:border-b-[#cfcfcf]
-                    ">
-                        <img 
-                        src="./icons/directory.png" 
-                        alt="enviar arquivo"
-                        className="w-6 h-6 mr-2"/>
-                        Enviar arquivo
-                    </label>
-                    <input type="file" name="arquivo" id="arquivo" className="hidden"/>
-                </div>
-            </form>
-                
+            <div className="box-bottom">           
+                <form>
+                    <div>
+                        <label htmlFor="arquivo" className="button-press">
+                            <img src="./icons/directory.png" alt="enviar arquivo" />
+                            Enviar arquivo
+                        </label>
+                        <input type="file" name="arquivo" id="arquivo" accept='.csv'
+                        onChange={e => handleFileChosen(e)}/>
+                    </div>
+                </form>
+                <button onClick={handleOpen} className="button-press">
+                    <img  src="./icons/chose.png" alt="enviar arquivo" />
+                    Escolher Colunas
+                </button>  
+                <button onClick={handleOpen} className="button-press">
+                    <img src="./icons/bar-graph.png" alt="enviar arquivo"/>
+                    Gerar Resultados
+                </button>              
+            </div>
+            <ModalSelect
+            isOpen = {isOpen}
+            handleClose = {handleClose}
+            />   
         </header>
     )
 }
