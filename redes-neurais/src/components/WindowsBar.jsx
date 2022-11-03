@@ -2,8 +2,7 @@
 import '../styles/windows-bar.css'
 
 export function WindowsBar(props) {
-    const personStyle = `
-    flex
+    const personStyle = `flex
     items-center
     justify-between
     w-[${props.size}px]
@@ -23,7 +22,22 @@ export function WindowsBar(props) {
 
     return (
         <div
-        className={personStyle}>
+        className="flex
+        items-center
+        justify-between
+        w-[300px]
+        h-8
+        px-2 
+        rounded-t-sm     
+        bg-gradient-to-r 
+        from-[#00008a]
+        to-[#0e7dbc]
+        border-x-4
+        border-t-4
+        border-[#bdbdbd]
+        border-t-[#bbbbbb]
+        border-l-[#ababab]
+        border-r-[#5e5e5e]">
             <div className="bar-box-name">    
                 <h1>{props.text}</h1>
             </div>
