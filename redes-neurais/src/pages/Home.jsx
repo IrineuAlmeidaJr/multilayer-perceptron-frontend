@@ -25,7 +25,7 @@ export function Home() {
 
   return (
     <div className="box-body">
-      <div className="bar">
+      <div className="windows-bar-956">
         <div className="bar-box-name">        
           <img src="./images/brain.png"  alt="imagem de celebro" />
           <h1>Redes Neurais 1.0</h1>

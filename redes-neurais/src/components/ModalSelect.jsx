@@ -1,8 +1,7 @@
 import Modal from '@mui/material/Modal';
 
-import { WindowsBar } from './WindowsBar';
-
 import '../styles/modal-select.css'
+import '../styles/windows-bar.css'
 
 export function ModalSelect(props) {
 
@@ -11,14 +10,23 @@ export function ModalSelect(props) {
         open={props.isOpen}
         onClose={props.handleClose}
         >
-            <div className="body">
-                <WindowsBar
-                text={"Selecionar Colunas"}
-                image={""}
-                size="300"
-                handleClose={props.handleClose}
-                />
-            
+            <div className="body">                
+                <div className="windows-bar-300">
+                    <div className="bar-box-name">    
+                        <h1>Selecionar Colunas</h1>
+                    </div>
+                    <div className="bar-box-buttons">
+                        <button className="minimize" onClick={() => console.log(Entrou)}>
+                            -
+                        </button>
+                        <button className="maximize">
+                            ▫
+                        </button>
+                        <button className="close" onClick={() => props.handleClose()}>
+                            x
+                        </button>
+                    </div>            
+                </div>            
                 <div className='central'>
                     Carregar uma lista com as coluna e o usuário que irá selecionar qual quer
                     <p> Para isso utilizar input options dinâmico</p>
