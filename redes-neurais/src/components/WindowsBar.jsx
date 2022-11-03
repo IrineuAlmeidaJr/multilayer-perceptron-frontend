@@ -2,10 +2,12 @@
 import '../styles/windows-bar.css'
 
 export function WindowsBar(props) {
+    console.log(`${props.size}px`)
+    const width_size = props.size ? `${props.size}px` : "300px";
     const personStyle = `flex
     items-center
     justify-between
-    w-[${props.size}px]
+    w-[${width_size}]
     h-8
     px-2 
     rounded-t-sm     

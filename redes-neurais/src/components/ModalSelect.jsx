@@ -15,7 +15,7 @@ export function ModalSelect(props) {
                 <WindowsBar
                 text={"Selecionar Colunas"}
                 image={""}
-                size={300}
+                size="300"
                 handleClose={props.handleClose}
                 />
             

@@ -61,8 +61,7 @@
     border-r-[#1f1f1f]
     active:border-r-[#cfcfcf]
     border-b-[#1f1f1f]
-    active:border-b-[#cfcfcf]
-    font-bold
+    active:border-b-[#cfcfcf]    
     text-2xl
     text-[#232323]
 }
@@ -85,7 +84,7 @@
     border-b-[#1f1f1f]
     active:border-b-[#cfcfcf]
     font-semibold
-    text-3xl
+    text-2xl
     text-center
     text-[#232323]
 }
@@ -107,7 +106,6 @@
     active:border-r-[#cfcfcf]
     border-b-[#1f1f1f]
     active:border-b-[#cfcfcf]
-    font-bold
-    text-sm
+    font-semibold
     text-[#232323]
 }
