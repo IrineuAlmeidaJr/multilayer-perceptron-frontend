@@ -13,6 +13,13 @@ Aplicação desenvolvida com React JS, está na fase inicial.
 - JavaScript </br>
 - React </br>
 - Tailwind CSS 
+
+
+## 📺 Imagem
+<div>
+  <img src="https://raw.githubusercontent.com/IrineuAlmeidaJr/multilayer-perceptron-frontend/main/screen/tela.png"  width="600" />
+</div>
+</br>
  
 ## Instalação
 
