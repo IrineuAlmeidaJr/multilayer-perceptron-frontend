@@ -30,7 +30,7 @@ body *::-webkit-scrollbar {
 
 body *::-webkit-scrollbar-thumb, body *::-webkit-scrollbar-button {
   width: 16px;
-  height: 16px;
+  height: 80px;
   background: silver;
   box-shadow: inset 1px 1px #dfdfdf, inset -1px -1px gray;
   border: 1px solid;

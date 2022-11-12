@@ -1,8 +1,8 @@
 import Modal from '@mui/material/Modal';
 import { Fragment } from 'react';
 
-import '../styles/modal-select.css'
 import '../styles/windows-bar.css'
+import '../styles/modal-select.css'
 
 export function ModalSelect(props) {
 
@@ -41,7 +41,7 @@ export function ModalSelect(props) {
                 <div className='central'>
                     {
                         props.columns.length == 0 ?
-                        <p><strong>Atenção</strong>: carregar arquivo CSV antes</p>
+                        <p><strong>Atenção</strong>: carregue arquivo CSV antes</p>
                         :
                         <div className="box-selected">
                             <div className="list-selected">

@@ -125,11 +125,12 @@ export function Header(props) {
             isOpenSelect = {isOpenSelect}
             handleCloseSelect = {handleCloseSelect}
             columns = {props.columns}
-            setSelectedColumns = {props.setSelectedColumns}
+            setSelectedColumns = {props.setSelectedColumns}            
             />  
             <ModalResults 
             isOpenResults = {isOpenResults}
             handleCloseResults = {handleCloseResults}
+            results = {props.results}
             /> 
         </header>
     )

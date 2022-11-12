@@ -9,6 +9,7 @@ export function Home() {
   const [listTests, setListTests] = useState([]);
   const [columns, setColumns] = useState([]);
   const [selectedColumns, setSelectedColumns] = useState([]);
+  const [results, setResults] = useState([]);
 
   function handleTest(element) {
     const arrayElement = element.split(',')
@@ -21,7 +22,7 @@ export function Home() {
     let numberColSelected = 0
     selectedColumns.forEach(item => item && numberColSelected++);
     if (numberColSelected > 1) {
-      let endLine = listTests.length - 1;
+      let endLine = listTests.length;
       let endCollumns = listTests[0].length;
       let items = []
       let listSelecetedItems = [];
@@ -36,7 +37,8 @@ export function Home() {
       }
       // --> Para Teste e ver se está selecionando correto
       // listSelecetedItems.forEach(item => console.log(item));
-
+      setResults(listSelecetedItems);
+      listSelecetedItems.forEach(item => console.log(item));
       // ---> PRÓXIMO: pegar essa lista e jogar para o backend
       
     } else {
@@ -91,6 +93,7 @@ export function Home() {
         showResults = {showResults}
         columns = {columns}
         setSelectedColumns = {setSelectedColumns}
+        results = {results}
         />
         <div className="box-table">
           <TableElements

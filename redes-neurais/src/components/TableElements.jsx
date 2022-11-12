@@ -5,7 +5,7 @@ export function TableElements(props) {
     return (
         <>
             {
-                props.listTests.length > 0 &&            
+                props.listTests?.length > 0 &&            
                 <table>
                     <thead>
                         <tr>
