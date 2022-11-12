@@ -1,14 +1,25 @@
 import Modal from '@mui/material/Modal';
+import { Fragment } from 'react';
 
 import '../styles/modal-select.css'
 import '../styles/windows-bar.css'
 
 export function ModalSelect(props) {
 
+    function handleSelected() {
+        const myCheckBox = document.querySelectorAll('.mycheckbox')
+        let tempIsChecked = [];
+        myCheckBox.forEach(item => {
+            tempIsChecked.push(item.checked);
+        })
+        props.setSelectedColumns(tempIsChecked);   
+        props.handleCloseSelect();     
+    }
+
     return (
         <Modal
-        open={props.isOpen}
-        onClose={props.handleClose}
+        open={props.isOpenSelect}
+        onClose={props.handleCloseSelect}
         >
             <div className="body">                
                 <div className="windows-bar-300">
@@ -22,20 +33,35 @@ export function ModalSelect(props) {
                         <button className="maximize">
                             ▫
                         </button>
-                        <button className="close" onClick={() => props.handleClose()}>
+                        <button className="close" onClick={() => props.handleCloseSelect()}>
                             x
                         </button>
                     </div>            
                 </div>            
                 <div className='central'>
-                    Carregar uma lista com as coluna e o usuário que irá selecionar qual quer
-                    <p> Para isso utilizar input options dinâmico</p>
-                    <input type="checkbox" id="x1" name="x1" value="x1" />
-                    <label htmlFor="x1">X1</label><br/>
-                    <input type="checkbox" id="x2" name="x2" value="x2" />
-                    <label htmlFor="x2">X2</label><br/>
-                    <input type="checkbox" id="x3" name="x3" value="x3" />
-                    <label htmlFor="x3">X3</label><br/>                   
+                    {
+                        props.columns.length == 0 ?
+                        <p><strong>Atenção</strong>: carregar arquivo CSV antes</p>
+                        :
+                        <div className="box-selected">
+                            <div className="list-selected">
+                                {
+                                    props.columns.map(item => 
+                                        <Fragment key={item} >
+                                            <label htmlFor={item}>
+                                                <input type="checkbox" className="mycheckbox" value={item} />
+                                                {item}
+                                            </label>
+                                        </Fragment>    
+                                    )                            
+                                }   
+                            </div>                            
+                            <button onClick={handleSelected} className="button-press">
+                                Selecionar
+                            </button>    
+                        </div>                    
+                    }
+                                       
                 </div>
             </div>   
       </Modal>

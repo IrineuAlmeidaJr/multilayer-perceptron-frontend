@@ -1,12 +1,20 @@
 import { useState } from "react"
 import { ModalSelect } from './ModalSelect';
+import { ModalResults } from "./ModalResults";
 
 import '../styles/header.css'
 
 export function Header(props) {    
-    const [isOpen, setIsOpen] = useState(false);
-    const handleOpen = () => setIsOpen(true);
-    const handleClose = () => setIsOpen(false);
+    const [isOpenSelect, setIsOpenSelect] = useState(false);
+    const handleOpenSelect = () => setIsOpenSelect(true);
+    const handleCloseSelect = () => setIsOpenSelect(false);
+
+    const [isOpenResults, setIsOpenResults] = useState(false);
+    const handleOpenResults = () => {
+        props.showResults();
+        setIsOpenResults(true);
+    };
+    const handleCloseResults = () => setIsOpenResults(false);
 
     function handleFileChosen(input) {
         const file = input.target.files[0];
@@ -21,7 +29,7 @@ export function Header(props) {
             });
         };
     
-        // Casso erro aparece um alert
+        // Caso ocorra um erro aparece um alert
         reader.onerror = (event) => {
             alert(event.target.error.name);
         };
@@ -104,19 +112,25 @@ export function Header(props) {
                         onChange={e => handleFileChosen(e)}/>
                     </div>
                 </form>
-                <button onClick={handleOpen} className="button-press">
+                <button onClick={handleOpenSelect} className="button-press">
                     <img  src="./icons/chose.png" alt="enviar arquivo" />
                     Escolher Colunas
                 </button>  
-                <button onClick={handleOpen} className="button-press">
+                <button onClick={handleOpenResults} className="button-press">
                     <img src="./icons/bar-graph.png" alt="enviar arquivo"/>
                     Gerar Resultados
                 </button>              
             </div>
             <ModalSelect
-            isOpen = {isOpen}
-            handleClose = {handleClose}
-            />   
+            isOpenSelect = {isOpenSelect}
+            handleCloseSelect = {handleCloseSelect}
+            columns = {props.columns}
+            setSelectedColumns = {props.setSelectedColumns}
+            />  
+            <ModalResults 
+            isOpenResults = {isOpenResults}
+            handleCloseResults = {handleCloseResults}
+            /> 
         </header>
     )
 }

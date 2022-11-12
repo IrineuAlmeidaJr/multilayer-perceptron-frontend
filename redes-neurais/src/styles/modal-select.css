@@ -1,3 +1,9 @@
+p {
+    @apply 
+    py-8
+    text-center
+}
+
 .body {
     @apply
     flex
@@ -26,4 +32,55 @@
     border-l-[#ababab]
     border-b-[#6c6c6c]
     border-r-[#5e5e5e]
+}
+
+.box-selected {
+    @apply
+    flex
+    flex-col
+    justify-center
+    items-center
+    text-sm    
+}
+
+.box-selected .list-selected {
+    @apply
+    my-2
+    grid
+    grid-cols-3
+    gap-4
+    gap-x-8
+    justify-items-center
+}
+
+.box-selected .list-selected input {
+    @apply
+    mr-2
+}
+
+.box-selected .box-bottom input {
+    @apply
+    hidden
+}
+
+.box-selected .button-press {
+    @apply 
+    flex
+    items-center
+    justify-center
+    my-3
+    h-10
+    w-52
+    uppercase
+    cursor-pointer
+    bg-[#bdbdbd] 
+    border-2
+    border-t-[#cfcfcf]
+    active:border-t-[#1f1f1f]
+    border-l-[#cfcfcf]
+    active:border-l-[#1f1f1f]
+    border-r-[#1f1f1f]
+    active:border-r-[#cfcfcf]
+    border-b-[#1f1f1f]
+    active:border-b-[#cfcfcf]
 }

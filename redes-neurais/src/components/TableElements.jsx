@@ -14,6 +14,7 @@ export function TableElements(props) {
                                     <th key={item} scope="col">
                                         {item}
                                     </th>
+                                    
                                 ))
                             }
                         </tr>
@@ -22,10 +23,10 @@ export function TableElements(props) {
                         { 
                             (() => {
                                 const arr = [];
-                                const ate = props.listTests.length - 1
-                                for (let i = 1; i < ate; i++) {
+                                const end = props.listTests.length - 1
+                                for (let i = 1; i < end; i++) {
                                     arr.push(
-                                        <tr>
+                                        <tr key={i}>
                                             {
                                                 props.listTests[i].map((item) => (
                                                     <td>
