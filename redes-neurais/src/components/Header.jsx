@@ -16,7 +16,8 @@ export function Header(props) {
     };
     const handleCloseResults = () => setIsOpenResults(false);
 
-    function handleFileChosen(input) {
+    function handleFileChosenTraining(input) {
+        console.log("TREINO")
         const file = input.target.files[0];
         const reader = new FileReader();
     
@@ -25,7 +26,7 @@ export function Header(props) {
             const allLines = file.split(/\r\n|\n/);
             // Reading line by line
             allLines.forEach((line) => {
-                props.handleTest(line)
+                props.handleListTraining(line)
             });
         };
     
@@ -34,8 +35,66 @@ export function Header(props) {
             alert(event.target.error.name);
         };
     
-        reader.readAsText(file);
+        reader.readAsText(file);    
+    }
+
+    function handleFileChosenTest(input) {
+        console.log("TESTE")
+        const file = input.target.files[0];
+        const reader = new FileReader();
     
+        reader.onload = (event) => {
+            const file = event.target.result;
+            const allLines = file.split(/\r\n|\n/);
+            // Reading line by line
+            allLines.forEach((line) => {
+                props.handleListTest(line)
+            });
+        };
+    
+        // Caso ocorra um erro aparece um alert
+        reader.onerror = (event) => {
+            alert(event.target.error.name);
+        };
+    
+        reader.readAsText(file);    
+    }
+
+    function handleTrainingHeader() {
+        const inputLayer = document.getElementById("input-layer").value;
+        const outputLayer = document.getElementById("output-layer").value;
+        const hiddenLayer = document.getElementById("hidden-layer").value;
+        if (inputLayer && outputLayer && hiddenLayer) {            
+            const errorValue = document.getElementById("error-value").value;;
+            const numberIterations = document.getElementById("number-iterations").value;;
+            const learningRate = document.getElementById("learning-rate").value;;
+            
+            if (errorValue && numberIterations && learningRate) {
+                const transferFunction = document.querySelector("input[name='function']:checked").value;
+
+                const calculationParameters = {
+                    inputLayer: inputLayer,
+                    outputLayer: outputLayer,
+                    hiddenLayer: hiddenLayer,
+                    errorValue: errorValue,
+                    numberIterations: numberIterations,
+                    learningRate: learningRate,
+                    transferFunction: transferFunction
+                } 
+
+                // console.log(calculationParameters);
+
+                props.handleTraining(calculationParameters);
+
+            } else {
+                console.log("ERRO: valor do erro | numero de iterações | N -> campo em BRANCO");
+            }
+        } else {
+            console.log("ERRO: configuração de números de neurôneos -> campo em BRANCO");
+        }
+        
+
+        // props.handleTraining();
     }
 
     return (
@@ -56,31 +115,31 @@ export function Header(props) {
                     <label className="title">Configurar números de neurôneos:</label>
                     <label className="my-label">
                         Camada de Entrada:
-                        <input type="text" defaultValue={6}  className="input-disabled" disabled/>
+                        <input type="text" defaultValue={6} id="input-layer" className="input-disabled" disabled/>
                     </label>
                     <label className="my-label">
                         Camada de Saída:
-                        <input type="text" defaultValue={6} className="input-disabled" disabled/>
+                        <input type="text" defaultValue={6} id="output-layer" className="input-disabled" disabled/>
                     </label>
                     <label className="my-label">
-                        Camada de Oculta:
-                        <input type="text" placeholder="5" className="input-enabled"/>
+                        Camada Oculta:
+                        <input type="text" placeholder="5" id="hidden-layer" className="input-enabled"/>
                     </label>
                 </div>
                 <div className="box-input-2">
                     <label>
                         Valor do Erro:
-                        <input type="text" placeholder="0,00001" />
+                        <input type="text" id="error-value" placeholder="0,00001" />
                     </label>
                     <label>
                         Número de Iterações:
-                        <input type="text" placeholder="2000" />
+                        <input type="text" id="number-iterations" placeholder="2000" />
                     </label>
                 </div>
                 <div className="box-input-3">
                     <label>
                         N:
-                        <input  type="text" placeholder="0,2" />
+                        <input type="text" id="learning-rate" placeholder="0,2" />
                     </label>
                 </div>
                 <div className="box-input-4">
@@ -88,15 +147,15 @@ export function Header(props) {
                         Função de Transferência:
                     </label>
                     <label className="my-label">
-                        <input type="radio" name="funcao" value={1} defaultChecked/>
+                        <input type="radio" name="function" value={1} defaultChecked/>
                         Linear
                     </label>
                     <label className="my-label">
-                        <input type="radio" name="funcao" value={2}/>
+                        <input type="radio" name="function" value={2}/>
                         Logística
                     </label>
                     <label className="my-label">
-                        <input type="radio" name="funcao" value={3}/>
+                        <input type="radio" name="function" value={3}/>
                         Hiperbórica
                     </label>
                 </div>
@@ -104,18 +163,28 @@ export function Header(props) {
             <div className="box-bottom">           
                 <form>
                     <div>
-                        <label htmlFor="arquivo" className="button-press">
+                        <label htmlFor="fileTraining" className="button-press">
                             <img src="./icons/directory.png" alt="enviar arquivo" />
-                            Enviar arquivo
+                            arquivo treino
                         </label>
-                        <input type="file" name="arquivo" id="arquivo" accept='.csv'
-                        onChange={e => handleFileChosen(e)}/>
+                        <input type="file" name="fileTraining" id="fileTraining" accept='.csv'
+                        onChange={e => handleFileChosenTraining(e)}/>
                     </div>
                 </form>
                 <button onClick={handleOpenSelect} className="button-press">
                     <img  src="./icons/chose.png" alt="enviar arquivo" />
                     Escolher Colunas
                 </button>  
+                <form>
+                    <div>
+                        <label htmlFor="fileTest" className="button-press">
+                            <img src="./icons/directory.png" alt="enviar arquivo" />
+                            arquivo teste
+                        </label>
+                        <input type="file" name="fileTest" id="fileTest" accept='.csv'
+                        onChange={e => handleFileChosenTest(e)}/>
+                    </div>
+                </form>
                 <button onClick={handleOpenResults} className="button-press">
                     <img src="./icons/bar-graph.png" alt="enviar arquivo"/>
                     Gerar Resultados
@@ -123,6 +192,7 @@ export function Header(props) {
             </div>
             <ModalSelect
             isOpenSelect = {isOpenSelect}
+            handleTrainingHeader = {handleTrainingHeader}
             handleCloseSelect = {handleCloseSelect}
             columns = {props.columns}
             setSelectedColumns = {props.setSelectedColumns}            

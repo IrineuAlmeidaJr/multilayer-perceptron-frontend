@@ -6,44 +6,94 @@ import "../styles/home.css"
 import "../styles/windows-bar.css"
 
 export function Home() {
+  const [listTraining, setListTraining] = useState([]);
   const [listTests, setListTests] = useState([]);
   const [columns, setColumns] = useState([]);
   const [selectedColumns, setSelectedColumns] = useState([]);
+  const [selectedTraining, setSelectedTraining] = useState([]);
   const [results, setResults] = useState([]);
 
-  function handleTest(element) {
+  function handleListTraining(element) {
+    const arrayElement = element.split(',')
+    setListTraining((listTraining) => [...listTraining, arrayElement])    
+    // console.log(arrayElement)
+    // Fazer aqui a divisão do arquivo só para testar o algoritmo 
+  }
+
+  function handleListTest(element) {
     const arrayElement = element.split(',')
     setListTests((listTests) => [...listTests, arrayElement])    
     // console.log(arrayElement)
     // Fazer aqui a divisão do arquivo só para testar o algoritmo 
   }
 
-  function showResults() {
+  function handleTraining(calculationParameters) {
     let numberColSelected = 0
     selectedColumns.forEach(item => item && numberColSelected++);
     if (numberColSelected > 1) {
-      let endLine = listTests.length;
-      let endCollumns = listTests[0].length;
+      let endLine = listTraining.length;
+      let endCollumns = listTraining[0].length;
       let items = []
       let listSelecetedItems = [];
       for(let lin=0; lin < endLine; lin++) {
         items = [];
         for(let col=0; col < endCollumns; col++) {
-          selectedColumns[col] && items.push(listTests[lin][col]);
+          selectedColumns[col] && items.push(listTraining[lin][col]);
         }
         // [endCollumns-1 => é a última coluna que guarda as classes
-        items.push(listTests[lin][endCollumns-1]);
+        items.push(listTraining[lin][endCollumns-1]);
         listSelecetedItems.push(items);   
       }
       // --> Para Teste e ver se está selecionando correto
       // listSelecetedItems.forEach(item => console.log(item));
-      setResults(listSelecetedItems);
+      setSelectedTraining(listSelecetedItems);
       listSelecetedItems.forEach(item => console.log(item));
       // ---> PRÓXIMO: pegar essa lista e jogar para o backend
+
+      const trainingParameters = {
+        calculationParameters: calculationParameters,
+        trainingData: listSelecetedItems
+      };
+
+      console.log(trainingParameters);
+
+      setResults(listSelecetedItems);
       
     } else {
       console.log("Selecione ao menos duas colunas")
     }
+  }
+
+  function showResults() {
+    // // Mudar depois listTraining - não sei se será isso
+    // let numberColSelected = 0
+    // selectedColumns.forEach(item => item && numberColSelected++);
+    // if (numberColSelected > 1) {
+    //   let endLine = listTraining.length;
+    //   let endCollumns = listTraining[0].length;
+    //   let items = []
+    //   let listSelecetedItems = [];
+    //   for(let lin=0; lin < endLine; lin++) {
+    //     items = [];
+    //     for(let col=0; col < endCollumns; col++) {
+    //       selectedColumns[col] && items.push(listTraining[lin][col]);
+    //     }
+    //     // [endCollumns-1 => é a última coluna que guarda as classes
+    //     items.push(listTraining[lin][endCollumns-1]);
+    //     listSelecetedItems.push(items);   
+    //   }
+    //   // --> Para Teste e ver se está selecionando correto
+    //   // listSelecetedItems.forEach(item => console.log(item));
+    //   setResults(listSelecetedItems);
+    //   listSelecetedItems.forEach(item => console.log(item));
+    //   // ---> PRÓXIMO: pegar essa lista e jogar para o backend
+
+      
+
+      
+    // } else {
+    //   console.log("Selecione ao menos duas colunas")
+    // }
   }
 
   // Essa função é só para teste
@@ -55,15 +105,15 @@ export function Home() {
   }
 
   useEffect(() => {
-    if (listTests?.[0]) {
+    if (listTraining?.[0]) {
       let tempArray = [];
-      let numberOfCollumns = listTests[0].length - 1;
+      let numberOfCollumns = listTraining[0].length - 1;
       for (let i=0; i < numberOfCollumns; i++) {
-        tempArray.push(listTests[0][i]);
+        tempArray.push(listTraining[0][i]);
       }
       setColumns(tempArray);
     }         
-  }, [listTests])
+  }, [listTraining])
 
   return (
     <div className="box-body">
@@ -89,7 +139,9 @@ export function Home() {
       </div>
       <div className="box-center">
         <Header
-        handleTest = {handleTest}
+        handleListTraining = {handleListTraining}
+        handleListTest = {handleListTest}
+        handleTraining = {handleTraining}
         showResults = {showResults}
         columns = {columns}
         setSelectedColumns = {setSelectedColumns}
@@ -97,7 +149,7 @@ export function Home() {
         />
         <div className="box-table">
           <TableElements
-          listTests = {listTests}
+          listTraining = {listTraining}
           />
         </div>
       </div>   

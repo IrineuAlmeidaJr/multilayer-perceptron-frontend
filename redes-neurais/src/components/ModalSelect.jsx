@@ -12,8 +12,12 @@ export function ModalSelect(props) {
         myCheckBox.forEach(item => {
             tempIsChecked.push(item.checked);
         })
-        props.setSelectedColumns(tempIsChecked);   
-        props.handleCloseSelect();     
+        props.setSelectedColumns(tempIsChecked);             
+    }
+
+    function handleTrainingSelect() {
+        props.handleTrainingHeader();
+        props.handleCloseSelect(); 
     }
 
     return (
@@ -58,7 +62,10 @@ export function ModalSelect(props) {
                             </div>                            
                             <button onClick={handleSelected} className="button-press">
                                 Selecionar
-                            </button>    
+                            </button>   
+                            <button onClick={handleTrainingSelect} className="button-press">
+                                Treinar
+                            </button>     
                         </div>                    
                     }
                                        

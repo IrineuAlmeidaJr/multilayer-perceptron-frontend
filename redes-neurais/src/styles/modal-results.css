@@ -37,3 +37,58 @@ p {
     border-r-[#5e5e5e]
 }
 
+
+.box-bottom-results {
+    @apply
+    my-2 
+    flex 
+    items-end
+}
+
+.box-bottom-results input {
+    @apply
+    hidden
+}
+
+
+.box-bottom-results .button-press {
+    @apply 
+    flex
+    items-center
+    justify-center
+    block
+    ml-3
+    mt-3
+    px-2
+    py-3
+    h-10
+    w-52
+    text-sm
+    uppercase
+    cursor-pointer
+    bg-[#bdbdbd] 
+    border-2
+    border-t-[#cfcfcf]
+    active:border-t-[#1f1f1f]
+    border-l-[#cfcfcf]
+    active:border-l-[#1f1f1f]
+    border-r-[#1f1f1f]
+    active:border-r-[#cfcfcf]
+    border-b-[#1f1f1f]
+    active:border-b-[#cfcfcf]
+}
+
+.box-bottom-results img {
+    @apply 
+    w-6
+    h-6 
+    mr-2
+}
+
+.graph-section {
+    @apply
+    mx-4 
+    border-[16px] 
+    border-white
+}
+
