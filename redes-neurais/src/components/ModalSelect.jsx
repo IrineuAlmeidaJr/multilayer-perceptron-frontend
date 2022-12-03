@@ -1,10 +1,12 @@
 import Modal from '@mui/material/Modal';
-import { Fragment } from 'react';
+import { Fragment, useState } from 'react';
 
 import '../styles/windows-bar.css'
 import '../styles/modal-select.css'
+import { useEffect } from 'react';
 
 export function ModalSelect(props) {
+    const [selectedItems, setSelectedItems] = useState([]);
 
     function handleSelected() {
         const myCheckBox = document.querySelectorAll('.mycheckbox')
@@ -19,6 +21,22 @@ export function ModalSelect(props) {
         props.handleTrainingHeader();
         props.handleCloseSelect(); 
     }
+
+    useEffect(() => {
+       
+        let tempSelected = [];
+        
+        props.columns.forEach((item) => {
+            tempSelected.push({
+                class: item,
+                isSelected: true
+            }) 
+        } )
+
+        setSelectedItems(tempSelected);
+        console.log("ENTROU SELECTED");
+                    
+    }, [props.columns])
 
     return (
         <Modal
@@ -50,11 +68,16 @@ export function ModalSelect(props) {
                         <div className="box-selected">
                             <div className="list-selected">
                                 {
-                                    props.columns.map(item => 
-                                        <Fragment key={item} >
-                                            <label htmlFor={item}>
-                                                <input type="checkbox" className="mycheckbox" value={item} />
-                                                {item}
+                                    selectedItems.map(item => 
+                                        <Fragment key={item.class} >
+                                            <label htmlFor={item.class}>
+                                                <input 
+                                                type="checkbox" 
+                                                className="mycheckbox"
+                                                defaultChecked={item.isSelected}
+                                                onChange={() => item.isSelected = !item.isSelected}
+                                                value={item.class} />
+                                                {item.class}
                                             </label>
                                         </Fragment>    
                                     )                            

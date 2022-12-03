@@ -8,11 +8,38 @@ export function Header(props) {
     const [isOpenSelect, setIsOpenSelect] = useState(false);
     const handleOpenSelect = () => setIsOpenSelect(true);
     const handleCloseSelect = () => setIsOpenSelect(false);
+    const [data, setData] = useState([]);
+
+    function getData() {
+        let tempData = [];
+        tempData.push(["Iterações", "Erro"])
+        fetch("http://localhost:8080/grafico")
+        .then(response => {
+                response.json()
+                .then(data => {
+                    data.forEach(item => {
+                        tempData.push([item.pos, item.mediaErroRede])                    
+                    })
+                
+            })                   
+        }) 
+        .then(setData(tempData)) 
+        .then(tempData)
+        .catch(function(err) {
+            console.error('Failed retrieving information', err);
+        })
+   
+       //  console.log(trainingParameters); 
+     }
 
     const [isOpenResults, setIsOpenResults] = useState(false);
     const handleOpenResults = () => {
-        props.showResults();
-        setIsOpenResults(true);
+        getData();
+        setTimeout(() => {  
+            props.showResults();        
+            setIsOpenResults(true);
+        }, 250);
+        
     };
     const handleCloseResults = () => setIsOpenResults(false);
 
@@ -119,7 +146,7 @@ export function Header(props) {
                     </label>
                     <label className="my-label">
                         Camada de Saída:
-                        <input type="text" defaultValue={6} id="output-layer" className="input-disabled" disabled/>
+                        <input type="text" defaultValue={5} id="output-layer" className="input-disabled" disabled/>
                     </label>
                     <label className="my-label">
                         Camada Oculta:
@@ -139,7 +166,7 @@ export function Header(props) {
                 <div className="box-input-3">
                     <label>
                         N:
-                        <input type="text" id="learning-rate" placeholder="0,2" />
+                        <input type="text" id="learning-rate" placeholder="0,02" />
                     </label>
                 </div>
                 <div className="box-input-4">
@@ -201,6 +228,7 @@ export function Header(props) {
             isOpenResults = {isOpenResults}
             handleCloseResults = {handleCloseResults}
             results = {props.results}
+            data = {data}
             /> 
         </header>
     )

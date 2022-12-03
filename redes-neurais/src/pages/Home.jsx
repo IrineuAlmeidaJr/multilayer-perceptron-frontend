@@ -27,6 +27,24 @@ export function Home() {
     // Fazer aqui a divisão do arquivo só para testar o algoritmo 
   }
 
+  function sendData(trainingParameters) {
+     // Mudar URL para local
+     const url = "http://localhost:8080/entrada";
+     fetch(url,{
+         method: "POST",
+         headers: {
+             'Content-type': 'application/json'
+         },
+         body: JSON.stringify(trainingParameters)
+     })
+     .then()
+     .catch(function(err) {
+         console.error('Failed retrieving information', err);
+     })
+
+    //  console.log(trainingParameters); 
+  }
+
   function handleTraining(calculationParameters) {
     let numberColSelected = 0
     selectedColumns.forEach(item => item && numberColSelected++);
@@ -55,7 +73,7 @@ export function Home() {
         trainingData: listSelecetedItems
       };
 
-      console.log(trainingParameters);
+      sendData(trainingParameters);
 
       setResults(listSelecetedItems);
       
