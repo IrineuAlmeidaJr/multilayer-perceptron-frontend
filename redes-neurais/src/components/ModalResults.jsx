@@ -59,11 +59,14 @@ export function ModalResults(props) {
                             :
                             <div className='flex flex-col flex-1 justify-center'>                                
                                 {
-                                    props.confusionMatrix?.classes 
-                                    &&                                     
+                                    props.confusionMatrix?.classes ?                                    
                                     <ConfusionMatrix
                                     confusionMatrix = {props.confusionMatrix}
                                     />
+                                    :
+                                    <h3 className='mx-4 text-lg font-bold'>
+                                        Carregue um arquivo de treino e teste para gerar a matriz de confusão
+                                    </h3>
                                 }
                             </div>
                         }                            
