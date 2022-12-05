@@ -1,5 +1,6 @@
 import Modal from '@mui/material/Modal';
 import { Chart } from "react-google-charts";
+import { ConfusionMatrix } from "./ConfusionMatrix";
 
 import '../styles/windows-bar.css'
 import '../styles/modal-results.css'
@@ -50,14 +51,20 @@ export function ModalResults(props) {
                             <Chart
                             className='graph-section'
                             chartType="Line"
-                            data={props.data}
+                            data={props.graphic}
                             width="99%"
                             height="600px"
                             legendToggle
                             /> 
                             :
-                            <div>
-                                <p> Matrix de Confusão </p>
+                            <div className='flex flex-col flex-1 justify-center'>                                
+                                {
+                                    props.confusionMatrix?.classes 
+                                    &&                                     
+                                    <ConfusionMatrix
+                                    confusionMatrix = {props.confusionMatrix}
+                                    />
+                                }
                             </div>
                         }                            
                     </div>                               

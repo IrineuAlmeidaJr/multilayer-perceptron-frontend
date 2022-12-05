@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import '../styles/table.css'
 
 export function TableElements(props) {
@@ -22,13 +23,18 @@ export function TableElements(props) {
                     <tbody>
                         { 
                             (() => {
+                                let listData = props.listTraining;
+                                if (props.listTests.length > 0) {
+                                    listData = props.listTests;
+                                }
+                                
                                 const arr = [];
-                                const end = props.listTraining.length - 1
+                                const end = listData.length - 1
                                 for (let i = 1; i < end; i++) {
                                     arr.push(
                                         <tr key={i}>
                                             {
-                                                props.listTraining[i].map((item) => (
+                                                listData[i].map((item) => (
                                                     <td>
                                                         {item}
                                                     </td>

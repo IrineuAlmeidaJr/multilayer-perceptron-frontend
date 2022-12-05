@@ -9,9 +9,8 @@ export function Home() {
   const [listTraining, setListTraining] = useState([]);
   const [listTests, setListTests] = useState([]);
   const [columns, setColumns] = useState([]);
+  const [calculationParameters, setCalculationParameters]  = useState("");
   const [selectedColumns, setSelectedColumns] = useState([]);
-  const [selectedTraining, setSelectedTraining] = useState([]);
-  const [results, setResults] = useState([]);
 
   function handleListTraining(element) {
     const arrayElement = element.split(',')
@@ -25,6 +24,7 @@ export function Home() {
     setListTests((listTests) => [...listTests, arrayElement])    
     // console.log(arrayElement)
     // Fazer aqui a divisão do arquivo só para testar o algoritmo 
+
   }
 
   function sendData(trainingParameters) {
@@ -41,11 +41,25 @@ export function Home() {
      .catch(function(err) {
          console.error('Failed retrieving information', err);
      })
-
-    //  console.log(trainingParameters); 
   }
 
-  function handleTraining(calculationParameters) {
+  function sendTest(testParameters) {
+    // Mudar URL para local
+    const url = "http://localhost:8080/matriz";
+    fetch(url,{
+        method: "POST",
+        headers: {
+            'Content-type': 'application/json'
+        },
+        body: JSON.stringify(testParameters)
+    })
+    .then()
+    .catch(function(err) {
+        console.error('Failed retrieving information', err);
+    })
+  }
+
+  function handleTraining(parameters) {
     let numberColSelected = 0
     selectedColumns.forEach(item => item && numberColSelected++);
     if (numberColSelected > 1) {
@@ -62,64 +76,60 @@ export function Home() {
         items.push(listTraining[lin][endCollumns-1]);
         listSelecetedItems.push(items);   
       }
-      // --> Para Teste e ver se está selecionando correto
-      // listSelecetedItems.forEach(item => console.log(item));
-      setSelectedTraining(listSelecetedItems);
-      listSelecetedItems.forEach(item => console.log(item));
-      // ---> PRÓXIMO: pegar essa lista e jogar para o backend
 
+      setCalculationParameters(parameters);
+      
       const trainingParameters = {
-        calculationParameters: calculationParameters,
+        calculationParameters: parameters,
         trainingData: listSelecetedItems
       };
 
       sendData(trainingParameters);
-
-      setResults(listSelecetedItems);
       
     } else {
       console.log("Selecione ao menos duas colunas")
     }
   }
 
-  function showResults() {
-    // // Mudar depois listTraining - não sei se será isso
-    // let numberColSelected = 0
-    // selectedColumns.forEach(item => item && numberColSelected++);
-    // if (numberColSelected > 1) {
-    //   let endLine = listTraining.length;
-    //   let endCollumns = listTraining[0].length;
-    //   let items = []
-    //   let listSelecetedItems = [];
-    //   for(let lin=0; lin < endLine; lin++) {
-    //     items = [];
-    //     for(let col=0; col < endCollumns; col++) {
-    //       selectedColumns[col] && items.push(listTraining[lin][col]);
-    //     }
-    //     // [endCollumns-1 => é a última coluna que guarda as classes
-    //     items.push(listTraining[lin][endCollumns-1]);
-    //     listSelecetedItems.push(items);   
-    //   }
-    //   // --> Para Teste e ver se está selecionando correto
-    //   // listSelecetedItems.forEach(item => console.log(item));
-    //   setResults(listSelecetedItems);
-    //   listSelecetedItems.forEach(item => console.log(item));
-    //   // ---> PRÓXIMO: pegar essa lista e jogar para o backend
+  function handleTests() {
+    if ((listTests.length-2) > 0) {
+      let numberColSelected = 0
+      selectedColumns.forEach(item => item && numberColSelected++);
+      if (numberColSelected > 1) {
+        let endLine = listTests.length;
+        let endCollumns = listTests[0].length;
+        let items = []
+        let listSelecetedItems = [];
+        for(let lin=0; lin < endLine; lin++) {
+          items = [];
+          for(let col=0; col < endCollumns; col++) {
+            selectedColumns[col] && items.push(listTests[lin][col]);
+          }
+          // endCollumns-1 => é a última coluna que guarda as classes
+          items.push(listTests[lin][endCollumns-1]);
+          listSelecetedItems.push(items);   
+        }
+        
+        const testParameters = {
+          calculationParameters: calculationParameters,
+          trainingData: listSelecetedItems
+        };
 
-      
-
-      
-    // } else {
-    //   console.log("Selecione ao menos duas colunas")
-    // }
+        sendTest(testParameters);
+        
+      } else {
+        console.log("Selecione ao menos duas colunas")
+      }
+    }    
   }
 
   // Essa função é só para teste
   function showData() {
-    // console.log("Números de Elementos -> "+ listTests.length)
-    // console.log("TESTE -> " + listTests[0][0])
-    // listTests.forEach((element) => console.log(element))  
-    console.log("Números de Elementos -> "+ (listTests.length-2))  
+    if ( listTests?.[0]) {
+      handleTests();
+    }    
+    console.log("Números arquivos Treino -> "+ (listTraining.length-1))
+    console.log("Números arquivos Teste -> "+ (listTests.length))
   }
 
   useEffect(() => {
@@ -130,8 +140,16 @@ export function Home() {
         tempArray.push(listTraining[0][i]);
       }
       setColumns(tempArray);
-    }         
+    }  
   }, [listTraining])
+
+  // Esse useEffect faz com que quando carregar novo arquivo ele já faça o calculo da 
+  // matriz de confusão
+  // useEffect(() => {
+  //   if ( listTests?.[0]) {
+  //     handleTests();
+  //   }   
+  // }, [listTests])
 
   return (
     <div className="box-body">
@@ -160,14 +178,15 @@ export function Home() {
         handleListTraining = {handleListTraining}
         handleListTest = {handleListTest}
         handleTraining = {handleTraining}
-        showResults = {showResults}
+        handleTests = {handleTests}
+        setListTests = {setListTests}
         columns = {columns}
         setSelectedColumns = {setSelectedColumns}
-        results = {results}
         />
         <div className="box-table">
           <TableElements
           listTraining = {listTraining}
+          listTests={listTests}
           />
         </div>
       </div>   

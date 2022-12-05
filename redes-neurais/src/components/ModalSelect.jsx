@@ -22,8 +22,7 @@ export function ModalSelect(props) {
         props.handleCloseSelect(); 
     }
 
-    useEffect(() => {
-       
+    useEffect(() => {       
         let tempSelected = [];
         
         props.columns.forEach((item) => {
@@ -33,9 +32,7 @@ export function ModalSelect(props) {
             }) 
         } )
 
-        setSelectedItems(tempSelected);
-        console.log("ENTROU SELECTED");
-                    
+        setSelectedItems(tempSelected);                    
     }, [props.columns])
 
     return (

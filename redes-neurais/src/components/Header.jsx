@@ -6,11 +6,28 @@ import '../styles/header.css'
 
 export function Header(props) {    
     const [isOpenSelect, setIsOpenSelect] = useState(false);
-    const handleOpenSelect = () => setIsOpenSelect(true);
-    const handleCloseSelect = () => setIsOpenSelect(false);
-    const [data, setData] = useState([]);
+    const [isOpenResults, setIsOpenResults] = useState(false);
 
-    function getData() {
+    const [graphic, setGraphic] = useState([]);
+    const [confusionMatrix, setConfusionMatrix] = useState([]);
+
+    const handleCloseSelect = () => setIsOpenSelect(false);
+    const handleOpenSelect = () => setIsOpenSelect(true);    
+    const handleCloseResults = () => setIsOpenResults(false);
+    const handleOpenResults = () => { 
+        // *** Correto seria fazer uma função assincrona
+        // FAZER DEPOIS ela assincrona
+        props.handleTests();
+        setTimeout(() => {                   
+            getGraphicsData();
+            getConfusionMatrix();
+            setTimeout(() => {                   
+                setIsOpenResults(true);
+            }, 250);
+        }, 250);
+    };  
+
+    function getGraphicsData() {
         let tempData = [];
         tempData.push(["Iterações", "Erro"])
         fetch("http://localhost:8080/grafico")
@@ -19,32 +36,28 @@ export function Header(props) {
                 .then(data => {
                     data.forEach(item => {
                         tempData.push([item.pos, item.mediaErroRede])                    
-                    })
-                
-            })                   
+                    })                
+                })                   
         }) 
-        .then(setData(tempData)) 
+        .then(setGraphic(tempData)) 
         .then(tempData)
         .catch(function(err) {
             console.error('Failed retrieving information', err);
         })
-   
-       //  console.log(trainingParameters); 
-     }
+    }
 
-    const [isOpenResults, setIsOpenResults] = useState(false);
-    const handleOpenResults = () => {
-        getData();
-        setTimeout(() => {  
-            props.showResults();        
-            setIsOpenResults(true);
-        }, 250);
-        
-    };
-    const handleCloseResults = () => setIsOpenResults(false);
+    function getConfusionMatrix() {
+        let tempData = [];
+        fetch("http://localhost:8080/matriz")
+        .then(response => response.json()) 
+        .then(data => setConfusionMatrix(data)) 
+        .catch(function(err) {
+            console.error('Failed retrieving information', err);
+        })
+    }
 
     function handleFileChosenTraining(input) {
-        console.log("TREINO")
+        console.log("ABRINDO ARQUIVO TREINO")
         const file = input.target.files[0];
         const reader = new FileReader();
     
@@ -66,7 +79,8 @@ export function Header(props) {
     }
 
     function handleFileChosenTest(input) {
-        console.log("TESTE")
+        props.setListTests([]);
+        console.log("ABRINDO ARQUIVO TESTE")
         const file = input.target.files[0];
         const reader = new FileReader();
     
@@ -84,9 +98,10 @@ export function Header(props) {
             alert(event.target.error.name);
         };
     
-        reader.readAsText(file);    
+        reader.readAsText(file); 
     }
 
+   
     function handleTrainingHeader() {
         const inputLayer = document.getElementById("input-layer").value;
         const outputLayer = document.getElementById("output-layer").value;
@@ -119,10 +134,8 @@ export function Header(props) {
         } else {
             console.log("ERRO: configuração de números de neurôneos -> campo em BRANCO");
         }
-        
-
-        // props.handleTraining();
     }
+    
 
     return (
         <header>
@@ -222,13 +235,13 @@ export function Header(props) {
             handleTrainingHeader = {handleTrainingHeader}
             handleCloseSelect = {handleCloseSelect}
             columns = {props.columns}
-            setSelectedColumns = {props.setSelectedColumns}            
+            setSelectedColumns = {props.setSelectedColumns}          
             />  
             <ModalResults 
             isOpenResults = {isOpenResults}
             handleCloseResults = {handleCloseResults}
-            results = {props.results}
-            data = {data}
+            graphic = {graphic}
+            confusionMatrix = {confusionMatrix}
             /> 
         </header>
     )
