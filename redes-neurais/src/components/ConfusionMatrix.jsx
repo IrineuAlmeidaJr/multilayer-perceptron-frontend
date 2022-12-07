@@ -8,7 +8,9 @@ export function ConfusionMatrix(props) {
         
             { (() => {
                 const sizeClass = props.confusionMatrix.classes.length+1;
-                const style =`w-full m-4 py-4 grid grid-cols-${sizeClass} gap-2 justify-items-center 
+                // const style =`w-full m-4 py-4 grid grid-cols-${sizeClass} gap-2 justify-items-center 
+                // bg-[#cfcfcf]`
+                const style =`w-full m-4 py-4 grid grid-cols-6 gap-2 justify-items-center 
                 bg-[#cfcfcf]`
 
                 return (
