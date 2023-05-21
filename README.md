@@ -3,7 +3,8 @@
 Aplicação desenvolvida com React JS, está na fase inicial.
 </p>
 
-‼️**OBS**: Frotend não está funcionado devido o Backend estava hospedado no Heroku gratuitamente e a plataforma passou a ser paga
+‼️**OBS**: Frotend não está funcionado devido o Backend estava hospedado no Heroku gratuitamente e a plataforma passou a ser paga. </br>
+‼️**OBS**: se quiser instalar o backend e roda localmente, basta acessar o meu respositório [multilayer-perceptron-backend](https://github.com/IrineuAlmeidaJr/multilayer-perceptron-backend) e baixar.
 
 <p align="center">
 <img src="http://img.shields.io/static/v1?label=STATUS&message=EM%20DESENVOLVIMENTO&color=GREEN&style=for-the-badge"/>
